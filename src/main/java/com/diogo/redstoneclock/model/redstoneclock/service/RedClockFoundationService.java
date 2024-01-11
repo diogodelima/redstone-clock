@@ -5,7 +5,7 @@ import org.bukkit.Location;
 
 import java.util.Optional;
 
-public interface RedstoneClockFoundationService {
+public interface RedClockFoundationService {
 
     void put(RedstoneClock redstoneClock);
 

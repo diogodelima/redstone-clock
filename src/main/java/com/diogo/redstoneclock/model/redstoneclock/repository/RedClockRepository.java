@@ -16,7 +16,7 @@ public class RedClockRepository implements RedClockFoundationRepository {
     @Override
     public void setup() {
         database
-                .execute("CREATE TABLE IF NOT EXISTS redstone_clock (location TEXT PRIMARY KEY NOT NULL, delay DOUBLE NOT NULL)")
+                .execute("CREATE TABLE IF NOT EXISTS redstone_clock (location VARCHAR(100) PRIMARY KEY NOT NULL, delay DOUBLE NOT NULL)")
                 .write();
     }
 

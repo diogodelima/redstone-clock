@@ -1,7 +1,7 @@
 database:
   type: "mysql"
-  user: "root"
-  password: ""
-  host: "localhost"
-  database: "test"
+  user: "u78_RMWAETuhOm"
+  password: "K^^aKGVHlCrGbjpsoF0yQIEt"
+  host: "147.135.26.21"
+  database: "s78_factions"
   file: ""

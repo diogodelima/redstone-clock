@@ -19,6 +19,9 @@ dependencies {
     compileOnly("com.github.decentsoftware-eu:decentholograms:2.8.6")
     compileOnly(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation("me.devnatan:inventory-framework-platform-bukkit:3.0.8")
+    implementation("org.jetbrains:annotations:23.0.0")
+
     annotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 

@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -29,12 +31,24 @@ public class RedstoneClock extends BukkitRunnable {
     private boolean active;
     private double delay;
 
-    public void setDelay(double delay) {
+    public void setDelay(double delay) throws Exception {
 
-        if (delay < 0.7 || delay > 1.2)
-            throw new RuntimeException("Invalid delay");
+        BigDecimal bigDecimal = BigDecimal.valueOf(delay).setScale(3, RoundingMode.FLOOR);
+
+        if (bigDecimal.compareTo(BigDecimal.valueOf(0.7)) < 0 || bigDecimal.compareTo(BigDecimal.valueOf(1.5)) > 0)
+            throw new Exception("Invalid delay");
 
         this.delay = delay;
+    }
+
+    public void setActive(boolean active) throws Exception {
+
+        BigDecimal bigDecimal = BigDecimal.valueOf(delay).setScale(3, RoundingMode.FLOOR);
+
+        if (active && (bigDecimal.compareTo(BigDecimal.valueOf(0.7)) < 0 || bigDecimal.compareTo(BigDecimal.valueOf(1.5)) > 0))
+            throw new Exception("Invalid delay");
+
+        this.active = active;
     }
 
     @Override

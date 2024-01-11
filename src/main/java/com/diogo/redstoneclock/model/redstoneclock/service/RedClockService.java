@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class RedstoneClockService implements RedstoneClockFoundationService {
+public class RedClockService implements RedClockFoundationService {
 
     private final Map<Location, RedstoneClock> cache = new HashMap<>();
     private final RedClockFoundationRepository redClockRepository;
 
-    public RedstoneClockService(Database database){
+    public RedClockService(Database database){
         this.redClockRepository = new RedClockRepository(database);
         this.redClockRepository.setup();
     }

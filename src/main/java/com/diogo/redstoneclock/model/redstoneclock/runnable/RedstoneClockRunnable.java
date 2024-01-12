@@ -33,7 +33,7 @@ public class RedstoneClockRunnable extends BukkitRunnable {
                     @Override
                     public void run() {
                         block.setType(Material.STAINED_GLASS);
-                        block.setData((byte) 14);
+                        block.setData((byte) (redstoneClock.isActive() ? 14 : 7));
                     }
                 }.runTaskLater(plugin, 5);
 

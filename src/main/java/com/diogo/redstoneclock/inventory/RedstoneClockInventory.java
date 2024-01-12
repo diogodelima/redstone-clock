@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -61,6 +62,11 @@ public class RedstoneClockInventory extends View {
 
                     Player player = click.getPlayer();
 
+                    if (redstoneClock.isActive()){
+                        player.sendMessage("§cDesligue o Relógio de Redstone para alterar o delay.");
+                        return;
+                    }
+
                     try {
                         redstoneClock.setDelay(redstoneClock.getDelay() + 0.1);
                         click.update();
@@ -78,6 +84,11 @@ public class RedstoneClockInventory extends View {
                 .onClick(click -> {
 
                     Player player = click.getPlayer();
+
+                    if (redstoneClock.isActive()){
+                        player.sendMessage("§cDesligue o Relógio de Redstone para alterar o delay.");
+                        return;
+                    }
 
                     try {
                         redstoneClock.setDelay(redstoneClock.getDelay() - 0.1);
@@ -98,12 +109,19 @@ public class RedstoneClockInventory extends View {
                 .build())
             .onClick(click -> {
 
-                    try {
-                        redstoneClock.setDelay(0.7);
-                        click.update();
-                    } catch (Exception e) {
-                        throw new RuntimeException("Delay unexpected");
-                    }
+                Player player = click.getPlayer();
+
+                if (redstoneClock.isActive()){
+                    player.sendMessage("§cDesligue o Relógio de Redstone para alterar o delay.");
+                    return;
+                }
+
+                try {
+                    redstoneClock.setDelay(0.7);
+                    click.update();
+                } catch (Exception e) {
+                    throw new RuntimeException("Delay unexpected");
+                }
 
             });
 
@@ -116,6 +134,13 @@ public class RedstoneClockInventory extends View {
                         ))
                         .build())
                 .onClick(click -> {
+
+                    Player player = click.getPlayer();
+
+                    if (redstoneClock.isActive()){
+                        player.sendMessage("§cDesligue o Relógio de Redstone para alterar o delay.");
+                        return;
+                    }
 
                     try {
                         redstoneClock.setDelay(1.2);

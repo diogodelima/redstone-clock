@@ -7,8 +7,10 @@ import com.vertz.database.database.Database;
 import org.bukkit.Location;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RedClockService implements RedClockFoundationService {
 
@@ -52,5 +54,16 @@ public class RedClockService implements RedClockFoundationService {
             this.cache.put(redstoneClock.getLocation(), redstoneClock);
 
         return Optional.ofNullable(redstoneClock);
+    }
+
+    @Override
+    public List<RedstoneClock> getAll() {
+        return this.cache
+                .keySet()
+                .stream()
+                .map(this::get)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
     }
 }

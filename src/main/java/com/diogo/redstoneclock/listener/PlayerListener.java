@@ -5,6 +5,7 @@ import com.diogo.redstoneclock.model.redstoneclock.RedstoneClock;
 import com.diogo.redstoneclock.model.redstoneclock.service.RedClockFoundationService;
 import lombok.AllArgsConstructor;
 import me.devnatan.inventoryframework.ViewFrame;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,9 @@ public class PlayerListener implements Listener {
         if (!item.isSimilar(RedstoneClock.display))
             return;
 
-        redClockService.put(new RedstoneClock(event.getBlock().getLocation(), false, 0.0));
+        redClockService.put(new RedstoneClock(event.getBlock().getLocation(), false, 0.7, 0.0));
+        event.getBlock().setType(Material.STAINED_GLASS);
+        event.getBlock().setData((byte) 7);
     }
 
     @EventHandler

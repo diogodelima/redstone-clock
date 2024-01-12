@@ -40,6 +40,7 @@ bukkit {
     prefix = "feltz-redstone-clock"
     version = "${project.version}"
     main = "com.diogo.redstoneclock.RedstoneClockPlugin"
+    depend = listOf("DecentHolograms", "InventoryFramework")
     commands {
         register("redstoneclock")
     }

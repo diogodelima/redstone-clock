@@ -14,11 +14,7 @@ public class RedstoneClockAdapter implements DatabaseAdapter<RedstoneClock> {
         Location location = Serializer.deserializeLocation((String) databaseQuery.get("location"));
         double delay = (Double) databaseQuery.get("delay");
 
-        return RedstoneClock.builder()
-                .location(location)
-                .delay(delay)
-                .active(false)
-                .build();
+        return new RedstoneClock(location, false, delay, 0.0);
     }
 
 }

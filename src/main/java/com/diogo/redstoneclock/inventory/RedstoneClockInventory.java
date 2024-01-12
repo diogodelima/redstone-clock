@@ -1,7 +1,9 @@
 package com.diogo.redstoneclock.inventory;
 
 import com.diogo.redstoneclock.model.redstoneclock.RedstoneClock;
+import com.diogo.redstoneclock.model.redstoneclock.service.RedClockFoundationService;
 import com.diogo.redstoneclock.util.ItemBuilder;
+import lombok.AllArgsConstructor;
 import me.devnatan.inventoryframework.View;
 import me.devnatan.inventoryframework.ViewConfigBuilder;
 import me.devnatan.inventoryframework.context.RenderContext;
@@ -11,11 +13,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 
+@AllArgsConstructor
 public class RedstoneClockInventory extends View {
+
+    private final RedClockFoundationService redClockService;
 
     private final State<ItemStack> itemStackState = computedState(context -> {
 
@@ -163,6 +167,7 @@ public class RedstoneClockInventory extends View {
                 Player player = click.getPlayer();
 
                 try {
+                    redClockService.update(redstoneClock);
                     redstoneClock.setActive(true);
                     click.closeForPlayer();
                 } catch (Exception e) {

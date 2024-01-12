@@ -26,7 +26,7 @@ public class RedstoneClockPlugin extends JavaPlugin {
         new RedstoneClockRunnable(redClockService, this).runTaskTimer(this, 0, 1);
 
         ViewFrame viewFrame = ViewFrame.create(this)
-                        .with(new RedstoneClockInventory())
+                        .with(new RedstoneClockInventory(redClockService))
                         .register();
 
         getCommand("redstoneclock").setExecutor(new RedstoneClockCommand());

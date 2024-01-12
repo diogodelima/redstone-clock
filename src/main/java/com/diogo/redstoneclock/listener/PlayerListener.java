@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -51,6 +52,25 @@ public class PlayerListener implements Listener {
 
         RedstoneClock redstoneClock = redstoneClockOptional.get();
         viewFrame.open(RedstoneClockInventory.class, player, redstoneClock);
+    }
+
+    @EventHandler
+    void onBlockBreak(BlockBreakEvent event){
+
+        Player player = event.getPlayer();
+
+        Optional<RedstoneClock> redstoneClockOptional = redClockService.get(event.getBlock().getLocation());
+
+        if (redstoneClockOptional.isEmpty())
+            return;
+
+        event.setCancelled(true);
+        event.getBlock().setType(Material.AIR);
+        RedstoneClock redstoneClock = redstoneClockOptional.get();
+        redstoneClock.getHologram().delete();
+        redClockService.remove(redstoneClock, true);
+        ItemStack item = RedstoneClock.display.clone();
+        player.getInventory().addItem(item);
     }
 
 }

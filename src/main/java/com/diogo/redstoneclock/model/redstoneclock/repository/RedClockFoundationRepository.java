@@ -1,7 +1,8 @@
 package com.diogo.redstoneclock.model.redstoneclock.repository;
 
 import com.diogo.redstoneclock.model.redstoneclock.RedstoneClock;
-import org.bukkit.Location;
+
+import java.util.Set;
 
 public interface RedClockFoundationRepository {
 
@@ -13,6 +14,6 @@ public interface RedClockFoundationRepository {
 
     void delete(RedstoneClock redstoneClock);
 
-    RedstoneClock findOne(Location location);
+    Set<RedstoneClock> findAll();
 
 }

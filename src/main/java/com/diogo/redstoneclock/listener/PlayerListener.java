@@ -31,7 +31,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getItemInHand();
 
-        if (!item.isSimilar(RedstoneClock.display))
+        if (event.isCancelled() || !item.isSimilar(RedstoneClock.display))
             return;
 
         redClockService.put(new RedstoneClock(event.getBlock().getLocation(), false, 0.7, 0.0));

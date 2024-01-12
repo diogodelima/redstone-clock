@@ -20,6 +20,7 @@ public class RedClockService implements RedClockFoundationService {
     public RedClockService(Database database){
         this.redClockRepository = new RedClockRepository(database);
         this.redClockRepository.setup();
+        this.redClockRepository.findAll().forEach(redstoneClock -> this.cache.put(redstoneClock.getLocation(), redstoneClock));
     }
 
     @Override
@@ -42,18 +43,7 @@ public class RedClockService implements RedClockFoundationService {
 
     @Override
     public Optional<RedstoneClock> get(Location location) {
-
-        RedstoneClock redstoneClock = this.cache.get(location);
-
-        if (redstoneClock != null)
-            return Optional.of(redstoneClock);
-
-        redstoneClock = this.redClockRepository.findOne(location);
-
-        if (redstoneClock != null)
-            this.cache.put(redstoneClock.getLocation(), redstoneClock);
-
-        return Optional.ofNullable(redstoneClock);
+        return Optional.of(this.cache.get(location));
     }
 
     @Override

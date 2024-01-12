@@ -5,7 +5,8 @@ import com.diogo.redstoneclock.model.redstoneclock.adapter.RedstoneClockAdapter;
 import com.diogo.redstoneclock.util.Serializer;
 import com.vertz.database.database.Database;
 import lombok.AllArgsConstructor;
-import org.bukkit.Location;
+
+import java.util.Set;
 
 @AllArgsConstructor
 public class RedClockRepository implements RedClockFoundationRepository {
@@ -48,10 +49,10 @@ public class RedClockRepository implements RedClockFoundationRepository {
     }
 
     @Override
-    public RedstoneClock findOne(Location location) {
+    public Set<RedstoneClock> findAll() {
         return database
-                .execute("SELECT * FROM redstone_clock WHERE location = ?")
-                .readOneWithAdapter(statement -> statement.set(1, Serializer.serializeLocation(location)), this.adapter)
+                .execute("SELECT * FROM redstone_clock")
+                .readManyWithAdapter(this.adapter)
                 .join();
     }
 
